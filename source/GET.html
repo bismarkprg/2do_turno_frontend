@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente Backend API Completo</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background-color: #f4f4f9;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Botones con colores distintos para identificar acciones */
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .btn-get {
+            background-color: #17a2b8;
+        }
+
+        .btn-post {
+            background-color: #28a745;
+        }
+
+        .btn-put {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        /* Amarillo para Update */
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+
+        .response-area {
+            margin-top: 20px;
+        }
+
+        .note {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Interfaz POST</h1>
+
+    <div class="card">
+        <h2>2. Crear Registro (POST)</h2>
+        <form id="formPost">
+            <label>RU:</label>
+            <input type="text" id="RU" required>
+            <label>Nombre:</label>
+            <input type="text" id="nombre" required>
+            <label>Apellido Paterno:</label>
+            <input type="text" id="ap_paterno" required>
+            <label>Apellido Materno:</label>
+            <input type="text" id="ap_materno" required>
+            <label>Fecha de Nacimiento:</label>
+            <input type="date" id="fecha_nacimiento" required>
+            <label>Universidad:</label>
+            <input type="text" id="universidad" required>
+            <button type="submit" class="btn-post">Enviar Datos</button>
+        </form>
+    </div>
+
+
+
+    <div class="response-area">
+        <h3>Respuesta del Servidor:</h3>
+        <pre id="output">Esperando acción...</pre>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000';
+
+        function mostrarRespuesta(data) {
+            const output = document.getElementById('output');
+            output.textContent = JSON.stringify(data, null, 2);
+        }
+
+        // --- POST ---
+        document.getElementById('formPost').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const datos = {
+                RU: document.getElementById('RU').value,
+                nombre: document.getElementById('nombre').value,
+                ap_paterno: document.getElementById('ap_paterno').value,
+                ap_materno: document.getElementById('ap_materno').value,
+                fecha_nacimiento: document.getElementById('fecha_nacimiento').value,
+                universidad: document.getElementById('universidad').value,
+            };
+
+            try {
+                const res = await fetch(`${API_URL}/datos`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datos)
+                });
+                mostrarRespuesta(await res.json());
+            } catch (error) { mostrarRespuesta({ error: "Error en POST" }); }
+        });
+
+    </script>
+</body>
+
+</html>

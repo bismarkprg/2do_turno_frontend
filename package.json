@@ -1,0 +1,34 @@
+{
+  "name": "react-tsx-starter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5173 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 5173 --strictPort"
+  },
+  "dependencies": {
+    "@popperjs/core": "2.11.8",
+    "axios": "^1.12.2",
+    "bootstrap": "5.3.8",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-icons": "^5.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.15",
+    "@types/node": "^20.11.0",
+    "@types/react": "19.1.15",
+    "@types/react-dom": "19.1.9",
+    "@vitejs/plugin-react": "^4.3.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.38.0",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "sass": "^1.77.0",
+    "tailwindcss": "^4.1.15",
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0"
+  }
+}
